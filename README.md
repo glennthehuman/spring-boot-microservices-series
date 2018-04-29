@@ -26,8 +26,8 @@ Ex: `spring-boot-microservices-series> docker-compose up -d catalog-service --bu
     * export DOCKER_CERT_PATH="C:\Users\Glenn\.docker\machine\machines\default"
     * export DOCKER_MACHINE_NAME="default"
     * export COMPOSE_CONVERT_WINDOWS_PATHS="true"
-    * # Run this command to configure your shell:
-    * # eval $("D:\Docker Toolbox\docker-machine.exe" env)
+    * Run this command to configure your shell:
+    * eval $("D:\Docker Toolbox\docker-machine.exe" env)
 
 * MySQL container:
      * hostname: mysqldb
