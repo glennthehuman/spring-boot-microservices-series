@@ -38,6 +38,7 @@ Ex: `spring-boot-microservices-series> docker-compose up -d catalog-service --bu
      * hostname: rabbitmq
      * Ports: 5672:5672, 15672:15672
      * Admin UI: http://localhost:15672
+      * Docker sample: http://192.168.99.100:15672
      * Username/password: guest/guest
 
 * Vault:
