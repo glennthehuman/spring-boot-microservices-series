@@ -7,17 +7,10 @@ Code for SpringBoot MicroServices Blog Series
 
 `spring-boot-microservices-series> ./mvnw clean package -DskipTests=true`
 
+
 ### Start infrastructure modules in docker:
 
-`spring-boot-microservices-series> docker-compose up -d mysqldb rabbitmq setup-vault config-server service-registry hystrix-dashboard`
-
-**Start each microservice either in local or in docker:**
-
-**Local:** `spring-boot-microservices-series/catalog-service> ./mvnw spring-boot:run`
-
-**Docker:** `spring-boot-microservices-series> docker-compose up -d <service> --build --force-recreate`
-
-Ex: `spring-boot-microservices-series> docker-compose up -d catalog-service --build --force-recreate`
+`spring-boot-microservices-series> docker-compose up -d mysqldb rabbitmq setup-vault zipkin-server config-server service-registry hystrix-dashboard`
 
 * To know docker host IP: docker-machine env
   * sample output:
@@ -38,13 +31,19 @@ Ex: `spring-boot-microservices-series> docker-compose up -d catalog-service --bu
      * hostname: rabbitmq
      * Ports: 5672:5672, 15672:15672
      * Admin UI: http://localhost:15672
-        * or Docker sample: http://192.168.99.100:15672
+        * or Docker sample: http://192.168.99.100:15672/#/
      * Username/password: guest/guest
 
 * Vault:
     * hostname: vault
     * Ports: 8200:8200
+    * Admin UI: http://localhost:8200
     * Root token: 934f9eae-31ff-a8ef-e1ca-4bea9e07aa09
+
+* Zipkin:
+    * hostname: zipkin
+    * Ports: 9411:9411
+    * Admin UI: http://localhost:9411/zipkin/
 
 * config-server:
     * hostname: config-server
@@ -54,12 +53,25 @@ Ex: `spring-boot-microservices-series> docker-compose up -d catalog-service --bu
 * service-registry:
     * hostname: service-registry
     * Ports: 8761:8761
-    * URL: http://localhost:8761/
+    * Eureka UI: http://localhost:8761/
     
 * hystrix-dashboard:
     * hostname: hystrix-dashboard
     * Ports: 8788:8788
-    * URL: http://localhost:8788/hystrix
+    * Dashboard UI: http://localhost:8788/hystrix
+
+
+**Start each microservice either in local or in docker:**
+
+**Local:** `spring-boot-microservices-series/catalog-service> ./mvnw spring-boot:run`
+OR: > java -jar -Dserver.port=9797 target/catalog-service-0.0.1-SNAPSHOT-exec.jar
+(Now if you go to http://localhost:8761 you will notice that 2 instances of catalog-service got registered and you can see their hostname: port details as well.)
+
+**Docker:** `spring-boot-microservices-series> docker-compose up -d --build --force-recreate <service> `
+
+Ex: `spring-boot-microservices-series> docker-compose up -d --build --force-recreate catalog-service`
+
+(URLs specified are not UI!)
 
 * catalog-service:
     * hostname: catalog-service
@@ -80,3 +92,4 @@ Ex: `spring-boot-microservices-series> docker-compose up -d catalog-service --bu
     * hostname: shoppingcart-ui
     * Ports: 18080:8080
     * URL: http://localhost:18080
+   
