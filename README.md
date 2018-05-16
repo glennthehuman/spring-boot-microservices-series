@@ -94,3 +94,4 @@ Ex: `spring-boot-microservices-series> docker-compose up -d --build --force-recr
     * URL: http://localhost:18080
     * UI: http://localhost:8080/ui/
    
+![Shopping Cart UI](shoppingcart-ui.png)
